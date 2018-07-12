@@ -1,0 +1,50 @@
+PATH
+  remote: .
+  specs:
+    elasticsearch-index-transfer (0.1.0)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    aws-eventstream (1.0.1)
+    aws-partitions (1.95.0)
+    aws-sdk-core (3.22.1)
+      aws-eventstream (~> 1.0)
+      aws-partitions (~> 1.0)
+      aws-sigv4 (~> 1.0)
+      jmespath (~> 1.0)
+    aws-sdk-kms (1.6.0)
+      aws-sdk-core (~> 3)
+      aws-sigv4 (~> 1.0)
+    aws-sdk-s3 (1.17.0)
+      aws-sdk-core (~> 3, >= 3.21.2)
+      aws-sdk-kms (~> 1)
+      aws-sigv4 (~> 1.0)
+    aws-sigv4 (1.0.3)
+    elasticsearch (6.1.0)
+      elasticsearch-api (= 6.1.0)
+      elasticsearch-transport (= 6.1.0)
+    elasticsearch-api (6.1.0)
+      multi_json
+    elasticsearch-transport (6.1.0)
+      faraday
+      multi_json
+    faraday (0.15.2)
+      multipart-post (>= 1.2, < 3)
+    jmespath (1.4.0)
+    multi_json (1.13.1)
+    multipart-post (2.0.0)
+    rake (10.5.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  aws-sdk-s3
+  bundler (~> 1.16)
+  elasticsearch
+  elasticsearch-index-transfer!
+  rake (~> 10.0)
+
+BUNDLED WITH
+   1.16.1
