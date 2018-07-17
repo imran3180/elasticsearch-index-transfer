@@ -39,14 +39,14 @@ options = {
               "elasticsearch": {
                 "host": * source-host-ip *,
                 "port": * source-host-port *,
-                "index": * elasticsearch index name *
+                "index": * elasticsearch-index-name *
               }
             },
             "target": {
               "elasticsearch": {
                 "host": * target-host-ip *,
                 "port": * target-host-port *,
-                "index": * elasticsearch index name *
+                "index": * elasticsearch-index-name *
               }
             }
           }
@@ -60,16 +60,16 @@ options = {
               "elasticsearch": {
                 "host": * source-host-ip *,
                 "port": * source-host-port *,
-                "index": * elasticsearch index name *
+                "index": * elasticsearch-index-name *
               }
             },
             "target": {
               "s3": {
-                "region": * S3 region name *,
-                "access_key_id": * S3 access key id *,
-                "secret_access_key": * S3 secret_access_key *,
-                "bucket": * S3 bucket name *,
-                "prefix": * S3 folder/prefix * # optional	
+                "region": * S3-region-name *,
+                "access_key_id": * S3-access-key-id *,
+                "secret_access_key": * S3-secret-access-key *,
+                "bucket": * S3-bucket-name *,
+                "prefix": * S3-folder/prefix * # optional 
               }
             }
           }
@@ -81,20 +81,20 @@ This gem can only transfer data from AWS S3 to elasticsearch host only if backup
 
 ```ruby
 options = {
-			  "source": {
+            "source": {
               "s3": {
-                "region": * S3 region name *,
-                "access_key_id": * S3 access key id *,
-                "secret_access_key": * S3 secret_access_key *,
-                "bucket": * S3 bucket name *,
-                "prefix": * S3 folder/prefix * # optional	
+                "region": * S3-region-name *,
+                "access_key_id": * S3-access-key-id *,
+                "secret_access_key": * S3-secret-access-key *,
+                "bucket": * S3-bucket-name *,
+                "prefix": * S3-folder/prefix * # optional 
               }
             },
             "target": {
               "elasticsearch": {
                 "host": * targer-host-ip *,
                 "port": * target-host-port *,
-                "index": * elasticsearch index name * # if index name not given it will use index name of backed up index.
+                "index": * elasticsearch-index-name * # if index name not given it will use index name of backed up index.
               }
             },
             
@@ -103,7 +103,7 @@ Elasticsearch::Index::Transfer.execute(options)
 ```
 
 ## Test
-	rspec spec/elasticsearch-index-transfer.rb
+  rspec spec/elasticsearch-index-transfer.rb
 
 ## Contribute
 
