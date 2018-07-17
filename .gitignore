@@ -6,3 +6,5 @@
 /pkg/
 /spec/reports/
 /tmp/
+config/secrets.yml
+.byebug_history
