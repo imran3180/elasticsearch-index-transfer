@@ -103,7 +103,9 @@ Elasticsearch::Index::Transfer.execute(options)
 ```
 
 ## Test
-  rspec spec/elasticsearch-index-transfer.rb
+```ruby
+rspec spec/elasticsearch-index-transfer.rb
+```
 
 ## Contribute
 
