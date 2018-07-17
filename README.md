@@ -1,8 +1,12 @@
 # Elasticsearch::Index::Transfer
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/elasticsearch/index/transfer`. To experiment with that code, run `bin/console` for an interactive prompt.
+Ruby gem for transfering elasticsearch index data from one source to another. Currently this gem can transfer elasticsearch index data between
 
-TODO: Delete this and the text above, and describe your gem
+* elasticsearch to elasticsearch
+* elasticsearch to s3(AWS S3)
+* s3 to elasticsearch
+
+This gem is using [scroll API](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-scroll.html) provided by elasticsearch for backing up the elasticsearch index data.
 
 ## Installation
 
@@ -22,22 +26,91 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+If you are using irb console
 
-## Development
+```ruby
+require 'elasticsearch-index-transfer'
+```
 
-After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+#### From one elasticsearch host to another elasticsearch host
+```ruby
+options = {
+            "source": {
+              "elasticsearch": {
+                "host": * source-host-ip *,
+                "port": * source-host-port *,
+                "index": * elasticsearch index name *
+              }
+            },
+            "target": {
+              "elasticsearch": {
+                "host": * target-host-ip *,
+                "port": * target-host-port *,
+                "index": * elasticsearch index name *
+              }
+            }
+          }
+Elasticsearch::Index::Transfer.execute(options)
+```
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+#### From elasticsearch host to s3(AWS S3)
+```ruby
+options = {
+            "source": {
+              "elasticsearch": {
+                "host": * source-host-ip *,
+                "port": * source-host-port *,
+                "index": * elasticsearch index name *
+              }
+            },
+            "target": {
+              "s3": {
+                "region": * S3 region name *,
+                "access_key_id": * S3 access key id *,
+                "secret_access_key": * S3 secret_access_key *,
+                "bucket": * S3 bucket name *,
+                "prefix": * S3 folder/prefix * # optional	
+              }
+            }
+          }
+Elasticsearch::Index::Transfer.execute(options)
+```
 
-## Contributing
+#### From s3(AWS S3) to elasticsearch host
+This gem can only transfer data from AWS S3 to elasticsearch host only if backup on S3 is made by this gem only.
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/elasticsearch-index-transfer. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+```ruby
+options = {
+			  "source": {
+              "s3": {
+                "region": * S3 region name *,
+                "access_key_id": * S3 access key id *,
+                "secret_access_key": * S3 secret_access_key *,
+                "bucket": * S3 bucket name *,
+                "prefix": * S3 folder/prefix * # optional	
+              }
+            },
+            "target": {
+              "elasticsearch": {
+                "host": * targer-host-ip *,
+                "port": * target-host-port *,
+                "index": * elasticsearch index name * # if index name not given it will use index name of backed up index.
+              }
+            },
+            
+          }
+Elasticsearch::Index::Transfer.execute(options)
+```
+
+## Test
+	rspec spec/elasticsearch-index-transfer.rb
+
+## Contribute
+
+Issue Tracker: [https://github.com/imran3180/elasticsearch-index-transfer/issues](https://github.com/imran3180/elasticsearch-index-transfer/issues)
+
+Pull Request: [https://github.com/imran3180/elasticsearch-index-transfer/pulls](https://github.com/imran3180/elasticsearch-index-transfer/pulls)
 
 ## License
 
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
-
-## Code of Conduct
-
-Everyone interacting in the Elasticsearch::Index::Transfer project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/elasticsearch-index-transfer/blob/master/CODE_OF_CONDUCT.md).

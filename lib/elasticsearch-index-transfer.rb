@@ -1,1 +1,1 @@
-require 'elasticsearch/index/transfer/'
+require "elasticsearch/index/transfer"
